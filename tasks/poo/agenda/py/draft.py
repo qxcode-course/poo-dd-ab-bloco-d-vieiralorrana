@@ -1,5 +1,5 @@
 class Fone:
-    def __init__(self, id: str, number: str):
+    def _init_(self, id: str, number: str):
         self.__id = id
         self.__number = number
     
@@ -10,19 +10,18 @@ class Fone:
         return self.__number
 
     def isValid(self) -> bool:
-        validos: list[str] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "()", "."]
+        validos: str = "0123456789()."
         
-        for i in self.getNumber():
+        for i in self.__number:
             if i not in validos:
                 return False
-            
-            return True
+        return True
     
-    def __str__(self):
+    def _str_(self):
         return f"{self.getId()}:{self.getNumber()}"
 
 class Contact:
-    def __init__(self, name: str):
+    def _init_(self, name: str):
         self.__name = name
         self.__fones: list[Fone] = []
         self.__favorited: bool = False
@@ -42,14 +41,21 @@ class Contact:
         if fone.isValid() == False:
             print("fail: invalid number")
             return
+        
+        self.__fones.append(fone)
     
     def rmFone(self, index: int):
-        del self.getFones()[index]
+        self.__fones.pop(index)
     
-    def __str__(self):
-        return f"{self.getName()} [{self.getFones().join(" ,")}]"
+    def toogleFavorito(self):
+        self._favorited = not self._favorited
     
-
+    def isFavorited(self):
+        return self.__favorited
+    
+    def _str_(self):
+        fones = ", ".join([str(x) for x in self.__fones])
+        return f"{"-" if self._favorited == False else "@"} {self._name} [{fones}]"
 
 def main():
     contato = Contact("")
@@ -64,12 +70,13 @@ def main():
         elif args[0] == "show":
             print(contato)
         elif args[0] == "init":
-            contato = Contact([args[1]])
+            contato = Contact(args[1])
         elif args[0] == "add":
             contato.addFone(args[1], args[2])
         elif args[0] == "rm":
             contato.rmFone(int(args[1]))
+        elif args[0] == "tfav":
+            contato.toogleFavorito()
         
 
 main()
-
