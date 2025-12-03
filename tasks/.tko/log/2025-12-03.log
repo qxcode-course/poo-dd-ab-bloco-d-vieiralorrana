@@ -16,3 +16,6 @@
 2025-12-03 10:16:45, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:115
 2025-12-03 10:17:47, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:115
 2025-12-03 10:18:35, MOVE, v:1, k:poo@agenda, mode:BACK
+2025-12-03 19:14:14, MOVE, v:1, k:poo@agenda, mode:PICK
+2025-12-03 19:14:14, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0
+2025-12-03 19:14:33, MOVE, v:1, k:poo@agenda, mode:BACK
