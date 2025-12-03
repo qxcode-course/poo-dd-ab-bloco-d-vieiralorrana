@@ -1,50 +1,31 @@
 class Fone:
-<<<<<<< HEAD
     def __init__(self, id: str, number: str):
-<<<<<<< HEAD
-        self.__id = id 
-        self.__number = number
-    
-    def getId(self):
-        return self.__id
-    def getNumber(self):
-        return self.__number
-    def __str__(self):
-        return f"{self.getId()}:{self.getNumber()}"
-
-
-class Contato: 
-    def __init__(self, nome: str, tel):
-=======
-=======
-    def _init_(self, id: str, number: str):
->>>>>>> 80517d8863dba1f63ee09bb95e4ec8d3e112ede9
         self.__id = id
         self.__number = number
-    
-    def getId(self) -> str:
-        return self.__id
-    
-    def getNumber(self) -> str:
+
+    def getId(self):
+        return self.__id 
+
+    def getNumber(self):
         return self.__number
 
     def isValid(self) -> bool:
-        validos: str = "0123456789()."
-        
+        validos: str = "012345678()."
+
         for i in self.__number:
             if i not in validos:
                 return False
         return True
-    
-    def _str_(self):
-        return f"{self.getId()}:{self.getNumber()}"
 
-class Contact:
-    def _init_(self, name: str):
+    def __str__(self):
+        return f"{self.__id}:{self.__number}"
+
+class Contato:
+    def __init__(self, name: str):
         self.__name = name
         self.__fones: list[Fone] = []
-        self.__favorited: bool = False
-
+        self.__favoritado: bool = False
+    
     def getName(self):
         return self.__name
     
@@ -53,7 +34,7 @@ class Contact:
     
     def setName(self, name: str):
         self.getName() == name
-    
+
     def addFone(self, id: str, number: str):
         fone = Fone(id, number)
 
@@ -61,23 +42,56 @@ class Contact:
             print("fail: invalid number")
             return
         
-        self.__fones.append(fone)
-    
+        self.__fones.append(fone) 
+
     def rmFone(self, index: int):
         self.__fones.pop(index)
     
-    def toogleFavorito(self):
-        self._favorited = not self._favorited
+    def toogleFavorite(self):
+        self.__favoritado = not self.__favoritado
+
+    def isFavorited(self) -> bool:
+        return self.__favoritado
     
-    def isFavorited(self):
-        return self.__favorited
-    
-    def _str_(self):
+    def __str__(self):
         fones = ", ".join([str(x) for x in self.__fones])
-        return f"{"-" if self._favorited == False else "@"} {self._name} [{fones}]"
+        return f"{"-" if self.__favoritado == False else "@"} {self.__name} [{fones}]"
+    
+class Agenda:
+    def __init__(self):
+        self.contatos: list[Contato] = []
+    
+    def findPosByName(self, name: str):
+        for i, contato in enumerate(self.contatos):
+            if contato.getName() == name:
+                return i
+        return -1
+    
+    def addContato(self, name: str, fones: list[Fone]):
+        if self.findPosByName(name) == -1:
+            novo_contato = Contato(name)
+            for i in fones:
+                novo_contato.addFone(i.getId(), i.getNumber())
+            self.contatos.append(novo_contato)
+        else:
+            contato_existente = self.findPosByName(name)
+            for i in fones:
+                contato_existente.addFone(i.getId(), i.getNumber())
+    
+    def getContato(self, name: str) -> Contato | None:
+        if self.findPosByName(name) != -1:
+            return self.contatos[self.findPosByName(name)]
+        
+        return None
+
+    def __str__(self):
+        contatos = "\n".join([str(x) for x in self.contatos])
+        return f"{contatos}"
+    
+
 
 def main():
-    contato = Contact("")
+    agenda = Agenda()
 
     while True:
         line = input()
@@ -87,21 +101,15 @@ def main():
         if args[0] == "end":
             break
         elif args[0] == "show":
-            print(contato)
-        elif args[0] == "init":
-            contato = Contact(args[1])
+            print(agenda)
         elif args[0] == "add":
-            contato.addFone(args[1], args[2])
-        elif args[0] == "rm":
-            contato.rmFone(int(args[1]))
-        elif args[0] == "tfav":
-            contato.toogleFavorito()
-        
+            name = args[1]
+            fones = []
+            for item in args[2:]:
+                id, number = item.split(":", 1)
+                fones.append(Fone(id, number))
+            agenda.addContato(name, fones)
 
-<<<<<<< HEAD
-main()
 
->>>>>>> 7de7ab832ae8d3b2d90fc4eda655fbf92ff77e24
-=======
+
 main()
->>>>>>> 80517d8863dba1f63ee09bb95e4ec8d3e112ede9
