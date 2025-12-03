@@ -39,4 +39,10 @@
 2025-12-02 10:08:13, MOVE, v:1, k:poo@contato, mode:PICK
 2025-12-02 10:08:14, EXEC, v:1, k:poo@contato, mode:FULL, rate:0
 2025-12-02 10:08:16, MOVE, v:1, k:poo@contato, mode:BACK
+<<<<<<< HEAD
 >>>>>>> 7de7ab832ae8d3b2d90fc4eda655fbf92ff77e24
+=======
+2025-12-02 18:23:47, MOVE, v:1, k:poo@contato, mode:PICK
+2025-12-02 18:23:48, EXEC, v:1, k:poo@contato, mode:FULL, rate:0
+2025-12-02 18:23:51, MOVE, v:1, k:poo@contato, mode:BACK
+>>>>>>> 80517d8863dba1f63ee09bb95e4ec8d3e112ede9
